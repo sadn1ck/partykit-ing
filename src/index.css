@@ -1,0 +1,16 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  padding: 20px;
+}
+html,
+textarea {
+  background: #232323;
+  color: #fff;
+  padding: 4px;
+  border-radius: 4px;
+  outline: none;
+}

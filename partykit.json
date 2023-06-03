@@ -1,0 +1,6 @@
+{
+    "main": "src/server.ts",
+    "assets": "public",
+    "build": {
+    }
+  }
