@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import YPartyKitProvider from 'y-partykit/provider'
 import * as Y from 'yjs'
 
@@ -19,24 +19,21 @@ const provider = new YPartyKitProvider(
   },
 )
 
+const yMessage: Y.Text = doc.getText('message')
+const awareness = provider.awareness
+
 export function App() {
-  const ref = useRef<HTMLTextAreaElement | null>(null)
-
-  const yMessage: Y.Text = doc.getText('message')
-  const awareness = provider.awareness
-
   const generateRandomId = () =>
     Date.now().toString(36) + Math.random().toString(36).substring(2)
 
   const [userId] = useState<string>(generateRandomId())
+  const [textAreaContent, setContent] = useState<string>('')
 
   useEffect(() => {
     provider.connect()
     awareness.setLocalState({ id: userId })
     const yObserverFn: YObserverFn = (event) => {
-      if (ref.current) {
-        ref.current.textContent = event.currentTarget.toJSON()
-      }
+      setContent(event.currentTarget.toJSON())
     }
     yMessage.observe(yObserverFn)
 
@@ -49,7 +46,7 @@ export function App() {
         provider.disconnect()
       }
     }
-  }, [awareness, userId, yMessage])
+  }, [userId])
 
   const textAreaOnChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newValue = event.target.value
@@ -73,8 +70,8 @@ export function App() {
       </a>
       <span id='conns'>Connections: {awareness.getStates().size}</span> */}
       <textarea
-        ref={ref}
         onChange={textAreaOnChange}
+        value={textAreaContent}
         style={{
           width: '100%',
           height: '300px',

@@ -8,7 +8,6 @@
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "postinstall": "npx patch-package",
     "pkit": "partykit dev server.ts",
     "start": "concurrently \"npm run dev\" \"npm run pkit\""
   },
@@ -17,11 +16,11 @@
   },
   "dependencies": {
     "@types/node": "^20.2.5",
-    "partykit": "^0.0.0-6ce60e2",
+    "partykit": "^0.0.0-dd80fc3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "undici": "^5.22.1",
-    "y-partykit": "^0.0.0-6ce60e2",
+    "y-partykit": "^0.0.0-dd80fc3",
     "yjs": "^13.6.1"
   },
   "devDependencies": {
